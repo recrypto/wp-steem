@@ -1,0 +1,15 @@
+{
+    "name": "recrypto/wp-steem",
+    "description": "Publish your WordPress post to the Steem blockchain.",
+    "type": "project",
+    "require": {
+        "league/html-to-markdown": "^4.4"
+    },
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "ReCrypto",
+            "email": "recrypto@gmail.com"
+        }
+    ]
+}
