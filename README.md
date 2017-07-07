@@ -4,6 +4,7 @@
 Publish Your WordPress Posts on Steem Blockchain!
 
 ## Features
+- Automatically converts your post content into Markdown format
 - Publish your newly created WordPress post to the Steem blockchain
 - Publish your old WordPress post to the Steem blockchain
 - Update your published Steem post if you have used this plugin to publish that Steem post
@@ -14,6 +15,7 @@ Publish Your WordPress Posts on Steem Blockchain!
 
 ## Limitation
 - No support yet for scheduled posts but it will be supported on upcoming releases.
+- Conversion of post content to Markdown may be off sometimes.
 
 ## Note
 You will require your Steem _PRIVATE POSTING KEY_ for this plugin to work. Your _PRIVATE POSTING KEY_ is <strong>NOT</strong> stored on our servers.

@@ -15,6 +15,7 @@ WordPress Steem lets you publish your WordPress posts on Steem blockchain.
 WordPress Steem lets you publish your WordPress posts on Steem blockchain.
 
 = Features =
+- Automatically converts your post content into Markdown format
 - Publish your newly created WordPress post to the Steem blockchain
 - Publish your old WordPress post to the Steem blockchain
 - Update your published Steem post if you have used this plugin to publish that Steem post
@@ -38,6 +39,7 @@ The plugin will automatically get a 15% curation reward from the Steem post crea
 
 = Limitations =
 - No support yet for scheduled posts but it will be supported on upcoming releases.
+- Conversion of post content to Markdown may be off sometimes.
 
 = Support =
 Please support me by following me on Steem [@recrypto](https://steemit.com/@recrypto) or if you feel like donating, that would really help a lot on my future Steem developments around WordPress ecosystem. :)
