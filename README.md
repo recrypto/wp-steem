@@ -36,7 +36,7 @@ The plugin will automatically get a 15% curation reward from the Steem post crea
 ![screenshot-3.png](https://steemitimages.com/DQmPkkpjrLQQ3TiB7MB8h5YttThMBGFNDGtxzaFBJkWfaUE/screenshot-3.png)
 
 #### WordPress - Edit Post - With an option to update a Steem post already published on Steem blockchain (Backend)
-![screenshot-4.png](https://steemitimages.com/DQmbDXwouSPyGk6FgfuvMWxkwJdps9XTfKHpJm33WUMuxUW/screenshot-4.png)
+![screenshot-4.png](https://steemitimages.com/DQmWtt3SJFakEi2a11xrSqSkGqG5AzfULdAsAzPxixfi2Wq/screenshot-4.png)
 
 <hr>
 
