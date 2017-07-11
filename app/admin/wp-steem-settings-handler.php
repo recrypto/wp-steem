@@ -8,8 +8,31 @@ class WP_Steem_Settings_Handler {
 	public static function init() {
 		$instance = __CLASS__;
 
+		add_action('admin_notices', array($instance, 'display_notices'));
+
 		add_action('admin_menu', array($instance, 'register_pages'));
 		add_action('admin_init', array($instance, 'register_page_settings'));
+	}
+
+	public static function display_notices() { 
+		if (wp_steem_is_setup()) return; ?>
+
+		<div class="notice notice-warning is-dismissible">
+			<p>
+				<?php
+					printf(
+						__('Please setup the settings for %s.', 'wp-steem'),
+						sprintf(
+							'<a href="%s">%s</a>',
+							admin_url('options-general.php?page=wp-steem'),
+							__('WordPress Steem', 'wp-steem')
+						)
+					);
+				?>
+			</p>
+		</div>
+
+		<?php
 	}
 
 	public static function register_pages() {
@@ -156,7 +179,7 @@ class WP_Steem_Settings_Handler {
 		printf(
 			'<p>%s</p>',
 			sprintf(
-				__("Please only provide the %s only.", 'wp-steem'),
+				__("Please only provide the %s.", 'wp-steem'),
 				sprintf(
 					'<strong style="color: red;">"%s"</strong>',
 					__('PRIVATE POSTING KEY', 'wp-steem')

@@ -96,7 +96,8 @@ class WP_Steem_Post {
 
 		$converter = new HtmlConverter($options);
 
-		$body = $converter->convert($this->post->post_content);
+		$body = apply_filters('the_content', $this->post->post_content);
+		$body = $converter->convert($body);
 
 		// Fixes when HTML tags are stripped away including line breaks on headings
 		$body = str_replace('# ', "\n# ", $body);

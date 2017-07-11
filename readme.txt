@@ -16,6 +16,7 @@ WordPress Steem lets you publish your WordPress posts on Steem blockchain.
 
 = Features =
 - Automatically converts your post content into Markdown format
+- Automatically render WordPress shortcodes to Steem post (Assuming you are using the default WordPress editor NOT the Markdown editor)
 - Publish your newly created WordPress post to the Steem blockchain
 - Publish your old WordPress post to the Steem blockchain
 - Update your published Steem post if you have used this plugin to publish that Steem post
@@ -91,11 +92,20 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 
 == Changelog ==
 
-= 1.0.0 - 2017-07-07 =
-* Initial version in WordPress Plugin Repository
+= 1.0.1 - 2017-07-11 =
+* [NEW] Shortcodes should now be automatically rendered when posting to the Steem blockchain
+* [NEW] An insightful message if you haven't set the settings for WordPress Steem
+* [FIX] "parent_permalink" and "permalink" containing "_" character
+* [ENHANCED] Overall plugin performance
 
 
 == Upgrade Notice ==
 
 = 1.0.0 - 2017-07-07 =
 * Initial version in WordPress Plugin Repository
+
+= 1.0.1 - 2017-07-11 =
+* [NEW] Shortcodes should now be automatically rendered when posting to the Steem blockchain
+* [NEW] An insightful message if you haven't set the settings for WordPress Steem
+* [FIX] "parent_permalink" and "permalink" containing "_" character
+* [ENHANCED] Overall plugin performance

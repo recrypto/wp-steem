@@ -10,6 +10,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 		</label>
 	</p>
 
+	<p>
+		<?php 
+			printf(
+				'<strong>%s</strong> %s', 
+				__('Note:', 'wp-steem'),
+				__('Placing WordPress shortcodes do not work on the Markdown editor.', 'wp-steem')
+			); 
+		?>
+	</p>
+
 	<hr>
 
 	<textarea class="wp-editor-area" name="wp_steem[body]" cols="40" rows="10" autocomplete="off"><?php echo $steem_post->get_meta('body'); ?></textarea>

@@ -5,6 +5,7 @@ Publish Your WordPress Posts on Steem Blockchain!
 
 ## Features
 - Automatically converts your post content into Markdown format
+- Automatically render WordPress shortcodes to Steem post (Assuming you are using the default WordPress editor NOT the Markdown editor)
 - Publish your newly created WordPress post to the Steem blockchain
 - Publish your old WordPress post to the Steem blockchain
 - Update your published Steem post if you have used this plugin to publish that Steem post
@@ -36,7 +37,7 @@ The plugin will automatically get a 15% curation reward from the Steem post crea
 ![screenshot-3.png](https://steemitimages.com/DQmPkkpjrLQQ3TiB7MB8h5YttThMBGFNDGtxzaFBJkWfaUE/screenshot-3.png)
 
 #### WordPress - Edit Post - With an option to update a Steem post already published on Steem blockchain (Backend)
-![screenshot-4.png](https://steemitimages.com/DQmWtt3SJFakEi2a11xrSqSkGqG5AzfULdAsAzPxixfi2Wq/screenshot-4.png)
+![screenshot-4.png](https://steemitimages.com/DQmbDXwouSPyGk6FgfuvMWxkwJdps9XTfKHpJm33WUMuxUW/screenshot-4.png)
 
 <hr>
 

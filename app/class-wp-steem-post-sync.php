@@ -33,8 +33,8 @@ class WP_Steem_Post_Sync {
 		$post->update_meta('use_body', $attributes['use_body']);
 		$post->update_meta('body', $body);
 
-		$parent_permalink = $post->parent_permalink;
-		$permalink = $post->permalink;
+		$parent_permalink = $this->sanitize_permalink($post->parent_permalink);
+		$permalink = $this->sanitize_permalink($post->permalink);
 		$title = $post->title;
 		$body = $post->body;
 
@@ -45,7 +45,7 @@ class WP_Steem_Post_Sync {
 			}
 
 			$permalink = isset($attributes['permalink']) && sanitize_title($attributes['permalink'])
-							? sanitize_title($attributes['permalink']) 
+							? $this->sanitize_permalink($attributes['permalink']) 
 								: $permalink;
 			$rewards = isset($attributes['rewards']) && $attributes['rewards'] != null
 							? abs($attributes['rewards']) 
@@ -57,7 +57,8 @@ class WP_Steem_Post_Sync {
 				$title,
 				$body,
 				array(
-					'tags' => $tags
+					'tags' => $tags,
+					'canonical' => get_permalink($post->id),
 				),
 				array(
 					'rewards' => $rewards,
@@ -109,5 +110,9 @@ class WP_Steem_Post_Sync {
 			}
 		}
 		return $tags;
+	}
+
+	protected function sanitize_permalink($permalink) {
+		return str_replace('_', '-', sanitize_title($permalink));
 	}
 }

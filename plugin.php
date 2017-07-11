@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Steem
  * Plugin URI: https://github.com/recrypto/woocommerce-steem
  * Description: Accept Steem payments directly to your shop (Currencies: STEEM, SBD).
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: ReCrypto
  * Author URI: https://steemit.com/@recrypto
  * Requires at least: 4.1
@@ -15,7 +15,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('WP_STEEM_VERSION', '1.0.0');
+define('WP_STEEM_VERSION', '1.0.1');
 define('WP_STEEM_DIR_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('WP_STEEM_DIR_URL', trailingslashit(plugin_dir_url(__FILE__)));
 

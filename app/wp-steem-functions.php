@@ -29,6 +29,25 @@ function wp_steem_get_setting($key, $default = null) {
 	return isset($settings[$key]) ? $settings[$key] : $default;
 }
 
+/**
+ * Check if WordPress Steem is set up
+ *
+ * @since 1.0.1
+ * @return boolean
+ */
+function wp_steem_is_setup() {
+
+	if (empty(wp_steem_get_setting('account'))) {
+		return false;
+	}
+
+	if (empty(wp_steem_get_setting('posting_key'))) {
+		return false;
+	}
+
+	return true;
+}
+
 
 # 
 

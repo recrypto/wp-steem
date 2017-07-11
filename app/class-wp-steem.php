@@ -16,6 +16,9 @@ class WP_Steem {
 	public function post($parent_permalink, $permalink, $title, $body, $json_metadata = array(), $options = array()) {
 		$response_body = null;
 
+		$json_metadata['app'] = sprintf('wp-steem/%s', WP_STEEM_VERSION);
+		$json_metadata['community'] = 'blogs';
+
 		$response = wp_remote_post('https://steemful.com/api/v1/posts/', array(
 			'body' => array(
 				'key' => $this->posting_key,
