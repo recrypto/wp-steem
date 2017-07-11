@@ -4,7 +4,7 @@ Donate link: https://steemit.com/@recrypto/
 Tags: wordpress, wp-steem, steem, steemit
 Requires at least: 4.1
 Tested up to: 4.8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,11 +92,14 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 
 == Changelog ==
 
+= 1.0.0 - 2017-07-07 =
+* Initial version in WordPress Plugin Repository
+
 = 1.0.1 - 2017-07-11 =
 * [NEW] Shortcodes should now be automatically rendered when posting to the Steem blockchain
 * [NEW] An insightful message if you haven't set the settings for WordPress Steem
 * [FIX] "parent_permalink" and "permalink" containing "_" character
-* [ENHANCED] Overall plugin performance
+* [ENHANCEMENT] Overall plugin performance
 
 
 == Upgrade Notice ==
@@ -105,4 +108,4 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 * [NEW] Shortcodes should now be automatically rendered when posting to the Steem blockchain
 * [NEW] An insightful message if you haven't set the settings for WordPress Steem
 * [FIX] "parent_permalink" and "permalink" containing "_" character
-* [ENHANCED] Overall plugin performance
+* [ENHANCEMENT] Overall plugin performance
