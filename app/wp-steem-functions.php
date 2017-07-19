@@ -37,11 +37,11 @@ function wp_steem_get_setting($key, $default = null) {
  */
 function wp_steem_is_setup() {
 
-	if (empty(wp_steem_get_setting('account'))) {
+	if (wp_steem_get_setting('account') == null) {
 		return false;
 	}
 
-	if (empty(wp_steem_get_setting('posting_key'))) {
+	if (wp_steem_get_setting('posting_key') == null) {
 		return false;
 	}
 
