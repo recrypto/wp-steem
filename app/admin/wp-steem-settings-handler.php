@@ -78,6 +78,38 @@ class WP_Steem_Settings_Handler {
 			'wp-steem',
 			'general' 
 		);
+
+		add_settings_field(
+			'default_store',
+			__('Default Publish to Steem', 'wp-steem'),
+			array($instance, 'display_default_store_field'),
+			'wp-steem',
+			'general' 
+		);
+
+		add_settings_field(
+			'default_update',
+			__('Default Update to Steem', 'wp-steem'),
+			array($instance, 'display_default_update_field'),
+			'wp-steem',
+			'general' 
+		);
+
+		add_settings_field(
+			'default_tags',
+			__('Default Tags', 'wp-steem'),
+			array($instance, 'display_default_tags_field'),
+			'wp-steem',
+			'general' 
+		);
+
+		add_settings_field(
+			'post_types',
+			__('Post Types', 'wp-steem'),
+			array($instance, 'display_post_types_field'),
+			'wp-steem',
+			'general' 
+		);
 	}
 
 	public static function display_page_settings() { ?>
@@ -125,6 +157,17 @@ class WP_Steem_Settings_Handler {
 
 		if (isset($input['posting_key'])) {
 			$new_input['posting_key'] = sanitize_text_field(trim($input['posting_key']));
+		}
+
+		$new_input['default_store'] = isset($input['default_store']) ? true : false;
+		$new_input['default_update'] = isset($input['default_update']) ? true : false;
+
+		if (isset($input['default_tags'])) {
+			$new_input['default_tags'] = $input['default_tags'];
+		}
+
+		if (isset($input['post_types'])) {
+			$new_input['post_types'] = $input['post_types'];
 		}
 
 		return $new_input;
@@ -186,6 +229,99 @@ class WP_Steem_Settings_Handler {
 				)
 			)
 		);
+	}
+
+	/**
+	 * Display "default store" input field
+	 *
+	 * @since 1.0.2
+	 */
+	public static function display_default_store_field() {
+		printf(
+			'<input type="checkbox" name="wp_steem_settings[default_store]" value="1" %s />',
+			checked(true, wp_steem_get_setting('default_store'), false)
+		);
+		printf(
+			'<p>%s</p>',
+			__('By checking this, the checkbox for "Publish on Steem blockchain" is ticked in the Add New Post screen.', 'wp-steem')
+		);
+	}
+
+	/**
+	 * Display "default update" input field
+	 *
+	 * @since 1.0.2
+	 */
+	public static function display_default_update_field() {
+		printf(
+			'<input type="checkbox" name="wp_steem_settings[default_update]" value="1" %s />',
+			checked(true, wp_steem_get_setting('default_update'), false)
+		);
+		printf(
+			'<p>%s</p>',
+			__('By checking this, the checkbox for "Update on Steem blockchain" is ticked in the Edit Post screen.', 'wp-steem')
+		);
+	}
+
+	/**
+	 * Display "default tags" input field
+	 *
+	 * @since 1.0.2
+	 */
+	public static function display_default_tags_field() {
+		printf(
+			'<input type="text" class="regular-text" name="wp_steem_settings[default_tags]" value="%s" autocomplete="off" />',
+			wp_steem_get_setting('default_tags')
+		);
+		printf(
+			'<p>%s</p>',
+			__('Separated by a space. Ex. wordpress wordpress-steem steem blog', 'wp-steem')
+		);
+	}
+
+	/**
+	 * Display "post types" input field
+	 *
+	 * @since 1.0.2
+	 */
+	public static function display_post_types_field() {
+		$post_types = wp_steem_get_setting('post_types', array());
+
+		if ($_post_types = self::get_post_types()) {
+			foreach ($_post_types as $_post_type) {
+				printf(
+					'<p><label><input type="checkbox" name="wp_steem_settings[post_types][]" value="%1$s" %2$s />%3$s (%1$s)</label></p>',
+					$_post_type->name,
+					checked(true, in_array($_post_type->name, $post_types), false),
+					$_post_type->label
+				);
+			}
+		}
+	}
+
+
+	# Internal
+
+	protected static function get_post_types($args = array(), $output = 'objects', $operator = 'and') {
+		$args = wp_parse_args($args, array(
+			'public' => true,
+		));
+
+		$exclusions = array(
+			'attachment',
+		);
+
+		if ($post_types = get_post_types($args, $output, $operator)) {
+			foreach ($post_types as $post_type_key => $post_type) {
+				if ( ! in_array($post_type->name, $exclusions)) {
+					continue;
+				}
+
+				unset($post_types[$post_type_key]);
+			}
+		}
+
+		return $post_types;
 	}
 }
 

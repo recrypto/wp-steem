@@ -16,11 +16,11 @@ class WP_Steem_Post_Meta_Handler {
 	}
 
 	public static function post_actions() {
-		global $post; 
+		global $post;
 
 		$steem_post = new WP_Steem_Post($post); 
 
-		if ($steem_post->post->post_type != 'post') {
+		if ( ! in_array($steem_post->post->post_type, wp_steem_get_setting('post_types', array('post')))) {
 			return;
 		}
 
@@ -42,7 +42,7 @@ class WP_Steem_Post_Meta_Handler {
 
 				<?php if ($steem_post->published) : ?>
 					<label>
-						<input type="checkbox" name="wp_steem[update]" value="1" />
+						<input type="checkbox" name="wp_steem[update]" value="1" <?php checked(true, wp_steem_get_setting('default_update', false)); ?> />
 						<?php _e('Update on Steem blockchain', 'wp-steem'); ?>
 					</label>
 
@@ -109,7 +109,7 @@ class WP_Steem_Post_Meta_Handler {
 
 				<?php else : ?>
 					<label>
-						<input type="checkbox" name="wp_steem[publish]" value="1" />
+						<input type="checkbox" name="wp_steem[publish]" value="1" <?php checked(true, wp_steem_get_setting('default_store', false)); ?> />
 						<?php _e('Publish on Steem blockchain', 'wp-steem'); ?>
 					</label>
 
@@ -140,11 +140,23 @@ class WP_Steem_Post_Meta_Handler {
 							<label style="display: block;">
 								<strong><?php _e('Tags (Separated by a space)', 'wp-steem'); ?></strong>
 
-								<input type="text" name="wp_steem[tags]" value="" style="width: 100%;" />
+								<input type="text" name="wp_steem[tags]" value="<?php echo wp_steem_get_setting('default_tags'); ?>" style="width: 100%;" />
 							</label>
 						</p>
 					</div>
 				<?php endif; ?>
+
+				<p style="color: red;">
+					<?php 
+						printf(
+							__("WARNING: Once a post is published or updated on the Steem blockchain, there would be a %s record of it on the Steem blockchain.", 'wp-steem'), 
+							sprintf(
+								'<strong>%s</strong>',
+								__('PERMANENT', 'wp-steem')
+							)
+						);
+					?>
+				</p>
 
 			<?php else : ?>
 
@@ -170,7 +182,7 @@ class WP_Steem_Post_Meta_Handler {
 	public static function post($post_id) {
 		$post = new WP_Steem_Post($post_id);
 
-		if ($post->post->post_type != 'post') {
+		if ( ! in_array($post->post->post_type, wp_steem_get_setting('post_types', array('post')))) {
 			return;
 		}
 
@@ -223,7 +235,7 @@ class WP_Steem_Post_Meta_Handler {
 
 		$steem_post = new WP_Steem_Post($post); 
 
-		if ($steem_post->post->post_type != 'post') {
+		if ( ! in_array($steem_post->post->post_type, wp_steem_get_setting('post_types', array('post')))) {
 			return $content;
 		}
 
