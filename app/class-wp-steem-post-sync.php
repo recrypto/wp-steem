@@ -20,7 +20,7 @@ class WP_Steem_Post_Sync {
 			return false;
 		}
 
-		if ($post->post->post_type != 'post') {
+		if ( ! in_array($post->post->post_type, wp_steem_get_setting('post_types', array('post')))) {
 			return false;
 		}
 
