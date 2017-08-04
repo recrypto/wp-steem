@@ -4,7 +4,7 @@ Donate link: https://steemit.com/@recrypto/
 Tags: wordpress, wp-steem, steem, steemit
 Requires at least: 4.1
 Tested up to: 4.8.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -109,13 +109,18 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 * [NEW] Post Types field in Steem Settings
 * [ENHANCEMENT] Intuitive messages that guides the user
 
+= 1.0.3 - 2017-08-04 =
+* [ENHANCEMENT] Hide "Update on Steem blockchain" checkbox input if the Steem post reaches the 7 days allowed time frame to be editable.
+* [ENHANCEMENT] Doing an update on Steem blockchain action will not trigger if the Steem post reaches its 7 days allowed time frame to be editable.
+* [FIX] Corrected the wording for cooldown notice. There is no 5 minute cooldown for doing a Steem post edit.
+* [ENHANCEMENT] Preparing all the wordings for foreign translations in the future version of the plugin by wrapping them with WordPress locale functions.
+* [ENHANCEMENT] Added an intuitve message if trying to publish a WordPress Post on Steem blockchain when its still in the 5 minute cooldown interval.
 
 == Upgrade Notice ==
 
-= 1.0.2 - 2017-07-21 =
-* [FIX] wp_steem_is_setup() function
-* [NEW] Default Publish to Steem field in Steem Settings
-* [NEW] Default Update to Steem	field in Steem Settings
-* [NEW] Default Tags field in Steem Settings
-* [NEW] Post Types field in Steem Settings
-* [ENHANCEMENT] Intuitive messages that guides the user
+= 1.0.3 - 2017-08-04 =
+* [ENHANCEMENT] Hide "Update on Steem blockchain" checkbox input if the Steem post reaches the 7 days allowed time frame to be editable.
+* [ENHANCEMENT] Doing an update on Steem blockchain action will not trigger if the Steem post reaches its 7 days allowed time frame to be editable.
+* [FIX] Corrected the wording for cooldown notice. There is no 5 minute cooldown for doing a Steem post edit.
+* [ENHANCEMENT] Preparing all the wordings for foreign translations in the future version of the plugin by wrapping them with WordPress locale functions.
+* [ENHANCEMENT] Added an intuitve message if trying to publish a WordPress Post on Steem blockchain when its still in the 5 minute cooldown interval.

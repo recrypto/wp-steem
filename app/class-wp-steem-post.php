@@ -82,6 +82,13 @@ class WP_Steem_Post {
 			if ($name == 'use_body') {
 				return (boolean) $this->get_meta('use_body');
 			}
+
+			if ($name == 'editable') {
+				return (boolean) (isset($this->raw->expiration) 
+						? (strtotime($this->raw->expiration) + (60 * 60 * 24 * 7)) >= time()
+							: true)
+				;
+			}
 		}
 	}
 

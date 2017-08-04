@@ -46,4 +46,17 @@ class WP_Steem {
 	public function get_posting_key() {
 		return $this->posting_key;
 	}
+
+
+	# Helpers
+
+	/**
+	 * Retrieve last synced time on Steem blockchain
+	 * 
+	 * @since 1.0.3
+	 * @return timestamp
+	 */
+	public static function get_synced_at() {
+		return get_option('wp_steem_synced_at', time());
+	}
 }

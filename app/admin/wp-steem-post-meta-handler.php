@@ -8,11 +8,42 @@ class WP_Steem_Post_Meta_Handler {
 	public static function init() {
 		$instance = __CLASS__;
 
+		add_action('admin_notices', array($instance, 'post_notices'));
 		add_action('post_submitbox_misc_actions', array($instance, 'post_actions'));
 		add_action('save_post', array($instance, 'post'));
 
 		add_action('admin_enqueue_scripts', array($instance, 'register_editor_scripts'));
 		add_filter('the_editor', array($instance, 'display_editor'));
+	}
+
+	public static function post_notices() {
+		$screen = get_current_screen();
+
+		if ( ! isset($screen->post_type) || empty($screen->post_type)) {
+			return;
+		}
+
+		if ( ! isset($_GET['wp_steem_error'])) {
+			return;
+		}
+
+		$synced_at = WP_Steem::get_synced_at();
+	?>
+
+		<?php if ($_GET['wp_steem_error'] == 'cooldown' && time() - $synced_at < 300) : ?>
+			<div class="wp-steem-notice notice notice-error">
+				<p>
+					<?php 
+						printf(
+							__('Please wait for %s seconds to be able to publish this post to the Steem blockchain as there is a 5 minute cooldown.', 'wp-steem'),
+							300 - (time() - $synced_at)
+						);
+					?>
+				</p>
+			</div>
+		<?php endif; ?>
+
+		<?php
 	}
 
 	public static function post_actions() {
@@ -25,7 +56,7 @@ class WP_Steem_Post_Meta_Handler {
 		}
 
 		$default_reward_option = wp_steem_get_default_reward_option();
-		$synced_at = get_option('wp_steem_synced_at', time());
+		$synced_at = WP_Steem::get_synced_at();
 	?>
 
 		<hr>
@@ -36,15 +67,18 @@ class WP_Steem_Post_Meta_Handler {
 			<?php if (wp_steem_get_setting('account') && wp_steem_get_setting('posting_key')) : ?>
 
 				<?php if (time() - $synced_at < 300) : ?>
-					<p style="color: blue;"><?php _e("Please be reminded that there is a 5 minute cooldown when creating or updating a Steem post in the Steem blockchain.", 'wp-steem'); ?></p>
-					<p><?php printf('%s seconds left to do another post action.', 300 - (time() - $synced_at)); ?></p>
+					<p style="color: blue;"><?php _e("Please be reminded that there is a 5 minute cooldown when creating a Steem post in the Steem blockchain.", 'wp-steem'); ?></p>
+					<p><?php printf(__('%s seconds left to do another post action.', 'wp-steem'), 300 - (time() - $synced_at)); ?></p>
 				<?php endif; ?>
 
 				<?php if ($steem_post->published) : ?>
-					<label>
-						<input type="checkbox" name="wp_steem[update]" value="1" <?php checked(true, wp_steem_get_setting('default_update', false)); ?> />
-						<?php _e('Update on Steem blockchain', 'wp-steem'); ?>
-					</label>
+
+					<?php if ($steem_post->editable) : ?>
+						<label>
+							<input type="checkbox" name="wp_steem[update]" value="1" <?php checked(true, wp_steem_get_setting('default_update', false)); ?> />
+							<?php _e('Update on Steem blockchain', 'wp-steem'); ?>
+						</label>
+					<?php endif; ?>
 
 					<div>
 						<p>
@@ -190,6 +224,10 @@ class WP_Steem_Post_Meta_Handler {
 			if ( ! self::has_field('update') || self::get_field('update') == false) {
 				return;
 			}
+
+			if ( ! $post->editable) {
+				return;
+			}
 		}
 		else {
 			if ( ! self::has_field('publish') || self::get_field('publish') == false) {
@@ -198,13 +236,17 @@ class WP_Steem_Post_Meta_Handler {
 		}
 
 		$synchronizer = new WP_Steem_Post_Sync();
-		$synchronizer->handle($post, array(
+		$synchronized = $synchronizer->handle($post, array(
 			'use_body' => self::has_field('use_body'),
 			'body' => self::get_field('body'),
 			'tags' => self::get_field('tags'),
 			'permalink' => self::get_field('permalink'),
 			'rewards' => self::get_field('rewards'),
 		));
+
+		if ( ! $synchronized) {
+			self::trigger_notices();
+		}
 	}
 
 
@@ -255,6 +297,39 @@ class WP_Steem_Post_Meta_Handler {
 
 	public static function get_field($key) {
 		return self::has_field($key) ? $_POST['wp_steem'][$key] : null;
+	}
+
+
+	# Internals
+
+	/**
+	 * Register a query parameter to trigger the post notice
+	 *
+	 * @since 1.0.3
+	 * @param string $location
+	 * @return stirng $location
+	 */
+	public static function register_redirect_post_location($location) {
+		$instance = __CLASS__;
+
+		remove_filter('redirect_post_location', array($instance, 'register_redirect_post_location'));
+
+		$location = add_query_arg(array(
+			'wp_steem_error' => 'cooldown',
+		), $location);
+
+		return $location;
+	}
+
+	/**
+	 * Trigger the post notice
+	 *
+	 * @since 1.0.3
+	 */
+	protected static function trigger_notices() {
+		$instance = __CLASS__;
+
+		add_filter('redirect_post_location', array($instance, 'register_redirect_post_location'));
 	}
 }
 

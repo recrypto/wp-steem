@@ -79,13 +79,17 @@ class WP_Steem_Post_Sync {
 			);
 		}
 
+		if (empty($response) || ! isset($response->success) || $response->success == false) {
+			return false;
+		}
+
 		if ($response != null && $response->success == true) {
 			$post->update_meta('published', true);
 			$post->update_meta('tags', $tags);
-			$post->update_meta('rewards', $rewards);
 
 			if ($post->published_at == null) {
 				$post->update_meta('published_at', time());
+				$post->update_meta('rewards', $rewards);
 
 				$post->update_meta('parent_permalink', $response->data->operations[0][1]->parent_permlink);
 				$post->update_meta('permalink', $response->data->operations[0][1]->permlink);
@@ -98,6 +102,8 @@ class WP_Steem_Post_Sync {
 			// Remember when was the last successful communication with the Steem blockchain
 			update_option('wp_steem_synced_at', time());
 		}
+
+		return true;
 	}
 
 
