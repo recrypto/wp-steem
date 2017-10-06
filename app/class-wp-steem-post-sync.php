@@ -32,6 +32,11 @@ class WP_Steem_Post_Sync {
 
 		$post->update_meta('use_body', $attributes['use_body']);
 		$post->update_meta('body', $body);
+		$post->update_meta('tags', $tags);
+
+		if (get_post_status($post->id) != 'publish') {
+			return false;
+		}
 
 		$parent_permalink = $this->sanitize_permalink($post->parent_permalink);
 		$permalink = $this->sanitize_permalink($post->permalink);
