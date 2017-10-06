@@ -116,10 +116,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 * [ENHANCEMENT] Preparing all the wordings for foreign translations in the future version of the plugin by wrapping them with WordPress locale functions.
 * [ENHANCEMENT] Added an intuitve message if trying to publish a WordPress Post on Steem blockchain when its still in the 5 minute cooldown interval.
 
-= 1.0.3 - 2017-08-04 =
+= 1.0.4 - 2017-10-06 =
 * [FIX] It should not publish post if their post_status is "draft".
 
 == Upgrade Notice ==
 
-= 1.0.3 - 2017-08-04 =
+= 1.0.4 - 2017-10-06 =
 * [FIX] It should not publish post if their post_status is "draft".
