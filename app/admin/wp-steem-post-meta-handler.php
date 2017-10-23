@@ -407,7 +407,7 @@ class WP_Steem_Post_Meta_Handler {
 			'tabText' => __('Markdown', 'wp-steem'),
 		));
 
-		wp_enqueue_style('wp-steem', WP_STEEM_DIR_URL . 'public/assets/css/plugin.css');
+		wp_enqueue_style('wp-steem', WP_STEEM_DIR_URL . 'public/assets/css/plugin.min.css');
 	}
 
 	/**
