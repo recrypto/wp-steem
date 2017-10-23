@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return array
  */
 function wp_steem_get_settings() {
-	return get_option('wp_steem_settings', array());
+	return WP_Steem_Helper::get_settings();
 }
 
 /**
@@ -24,9 +24,7 @@ function wp_steem_get_settings() {
  * @return mixed
  */
 function wp_steem_get_setting($key, $default = null) {
-	$settings = wp_steem_get_settings();
-
-	return isset($settings[$key]) ? $settings[$key] : $default;
+	return WP_Steem_Helper::get_setting($key, $default);
 }
 
 /**
@@ -36,16 +34,7 @@ function wp_steem_get_setting($key, $default = null) {
  * @return boolean
  */
 function wp_steem_is_setup() {
-
-	if ( ! wp_steem_get_setting('account')) {
-		return false;
-	}
-
-	if ( ! wp_steem_get_setting('posting_key')) {
-		return false;
-	}
-
-	return true;
+	return WP_Steem_Helper::is_setup();
 }
 
 
@@ -81,11 +70,7 @@ function wp_steem($account = null, $posting_key = null) {
  * @return array
  */
 function wp_steem_get_platforms() {
-	return apply_filters('wp_steem_platforms', array(
-		'steemit' => __('Steemit', 'wp-steem'),
-		'chainbb' => __('chainBB', 'wp-steem'),
-		'busy' => __('Busy.org', 'wp_steem'),
-	));
+	return WP_Steem_Helper::get_platforms();
 }
 
 /**
@@ -95,11 +80,7 @@ function wp_steem_get_platforms() {
  * @return array
  */
 function wp_steem_get_reward_options() {
-	return apply_filters('wp_steem_reward_options', array(
-		100 => __('Power Up 100%', 'wp-steem'),
-		50 => __('Default (50% / 50%)', 'wp-steem'),
-		0 => __('Decline Payout', 'wp-steem')
-	));
+	return WP_Steem_Helper::get_rewards();
 }
 
 /**
@@ -109,5 +90,5 @@ function wp_steem_get_reward_options() {
  * @return int
  */
 function wp_steem_get_default_reward_option() {
-	return apply_filters('wp_steem_default_reward_option', 50);
+	return WP_Steem_Helper::get_default_reward();
 }

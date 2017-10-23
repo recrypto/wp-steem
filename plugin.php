@@ -3,11 +3,11 @@
  * Plugin Name: WordPress Steem
  * Plugin URI: https://github.com/recrypto/wp-steem
  * Description: Publish your WordPress posts on Steem blockchain.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: ReCrypto
  * Author URI: https://steemit.com/@recrypto
  * Requires at least: 4.1
- * Tested up to: 4.8.0
+ * Tested up to: 4.8.2
  *
  * Text Domain: wp-steem
  */
@@ -15,7 +15,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define('WP_STEEM_VERSION', '1.0.4');
+define('WP_STEEM_VERSION', '1.0.5');
 define('WP_STEEM_DIR_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('WP_STEEM_DIR_URL', trailingslashit(plugin_dir_url(__FILE__)));
 
@@ -56,6 +56,7 @@ function wp_steem_init() {
 	do_action('wp_steem_pre_init');
 
 	require_once(WP_STEEM_DIR_PATH . 'vendor/autoload.php');
+	require_once(WP_STEEM_DIR_PATH . 'app/class-wp-steem-helper.php');
 	require_once(WP_STEEM_DIR_PATH . 'app/class-wp-steem.php');
 	require_once(WP_STEEM_DIR_PATH . 'app/class-wp-steem-post.php');
 	require_once(WP_STEEM_DIR_PATH . 'app/class-wp-steem-post-sync.php');

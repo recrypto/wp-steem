@@ -3,8 +3,8 @@ Contributors: recrypto
 Donate link: https://steemit.com/@recrypto/
 Tags: wordpress, wp-steem, steem, steemit
 Requires at least: 4.1
-Tested up to: 4.8.0
-Stable tag: 1.0.4
+Tested up to: 4.8.2
+Stable tag: 1.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -119,7 +119,28 @@ Yes you can! Join in on our [GitHub repository](https://github.com/recrypto/wp-s
 = 1.0.4 - 2017-10-06 =
 * [FIX] It should not publish post if their post_status is "draft".
 
+= 1.0.5 - 2017-10-23 =
+* [FIX] Wrong grammar on message notices.
+* [FIX] If the content for Markdown contains "%" symbol
+* [NEW] Steemd (steemd.com) service under the "Platforms" list of links to check a Steem post.
+* [NEW] Introduce WP_Steem_Helper to encapsulate all helper functions (Older helper functions will be deprecated with it)
+* [ENHANCEMENT] Major overhaul on UI/UX
+* [ENHANCEMENT] Documented each functionality
+* [ENHANCEMENT] Steem tags should not be editable after 7 days
+* [ENHANCEMENT] Saving Steem post data such as Rewards, Permalink, Tags, and other fields without being published is possible.
+* [ENHANCEMENT] WordPress Steem API
+* [ENHANCEMENT] Improve overall functionality
+
 == Upgrade Notice ==
 
-= 1.0.4 - 2017-10-06 =
-* [FIX] It should not publish post if their post_status is "draft".
+= 1.0.5 - 2017-10-23 =
+* [FIX] Wrong grammar on message notices.
+* [FIX] If the content for Markdown contains "%" symbol
+* [NEW] Steemd (steemd.com) service under the "Platforms" list of links to check a Steem post.
+* [NEW] Introduce WP_Steem_Helper to encapsulate all helper functions (Older helper functions will be deprecated with it)
+* [ENHANCEMENT] Major overhaul on UI/UX
+* [ENHANCEMENT] Documented each functionality
+* [ENHANCEMENT] Steem tags should not be editable after 7 days
+* [ENHANCEMENT] Saving Steem post data such as Rewards, Permalink, Tags, and other fields without being published is possible.
+* [ENHANCEMENT] WordPress Steem API
+* [ENHANCEMENT] Improve overall functionality

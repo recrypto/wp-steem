@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
 	<hr>
 
-	<textarea class="wp-editor-area" name="wp_steem[body]" cols="40" rows="10" autocomplete="off"><?php echo $steem_post->get_meta('body'); ?></textarea>
+	<textarea class="wp-editor-area" name="wp_steem[body]" cols="40" rows="10" autocomplete="off"><?php echo esc_textarea(str_replace('%', '%%', $steem_post->get_meta('body'))); ?></textarea>
 </div>

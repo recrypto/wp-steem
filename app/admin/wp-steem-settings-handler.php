@@ -5,6 +5,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class WP_Steem_Settings_Handler {
 
+
+	/**
+	 * Initialize
+	 *
+	 * @since 1.0.0
+	 */
 	public static function init() {
 		$instance = __CLASS__;
 
@@ -14,6 +20,11 @@ class WP_Steem_Settings_Handler {
 		add_action('admin_init', array($instance, 'register_page_settings'));
 	}
 
+	/**
+	 * Display setting notices
+	 *
+	 * @since 1.0.1
+	 */
 	public static function display_notices() { 
 		if (wp_steem_is_setup()) return; ?>
 
@@ -35,6 +46,11 @@ class WP_Steem_Settings_Handler {
 		<?php
 	}
 
+	/**
+	 * Register pages
+	 *
+	 * @since 1.0.0
+	 */
 	public static function register_pages() {
 		$instance = __CLASS__;
 
@@ -47,6 +63,11 @@ class WP_Steem_Settings_Handler {
 		);
 	}
 
+	/**
+	 * Register page settings
+	 *
+	 * @since 1.0.0
+	 */
 	public static function register_page_settings() {
 		$instance = __CLASS__;
 
@@ -55,6 +76,9 @@ class WP_Steem_Settings_Handler {
 			'wp_steem_settings',
 			array($instance, 'sanitize')
 		);
+
+
+		# Section - General
 
 		add_settings_section(
 			'general', 
@@ -110,8 +134,55 @@ class WP_Steem_Settings_Handler {
 			'wp-steem',
 			'general' 
 		);
+
+
+		# Section - Templates
+
+		add_settings_section(
+			'templates', 
+			'Templates',
+			null,
+			'wp-steem'
+		);
+
+		add_settings_field(
+			'include_header',
+			__('Default Include Header', 'wp-steem'),
+			array($instance, 'display_default_include_header_field'),
+			'wp-steem',
+			'templates' 
+		);
+
+		add_settings_field(
+			'header',
+			__('Header', 'wp-steem'),
+			array($instance, 'display_header_field'),
+			'wp-steem',
+			'templates' 
+		);
+
+		add_settings_field(
+			'include_footer',
+			__('Default Include Footer', 'wp-steem'),
+			array($instance, 'display_default_include_footer_field'),
+			'wp-steem',
+			'templates' 
+		);
+
+		add_settings_field(
+			'footer',
+			__('Footer', 'wp-steem'),
+			array($instance, 'display_footer_field'),
+			'wp-steem',
+			'templates' 
+		);
 	}
 
+	/**
+	 * Display page settings
+	 *
+	 * @since 1.0.0
+	 */
 	public static function display_page_settings() { ?>
 
 		<div class="wrap">
@@ -130,8 +201,19 @@ class WP_Steem_Settings_Handler {
 					<?php 
 						printf(
 							__("If you would like to continue to support this plugin, please consider helping out the development and maintenance cost of this plugin by donating STEEM/SBD to %s or simply support by upvoting %s post. I would greatly appreciate it. :)", 'wp-steem'),
-							sprintf('<a href="%s" target="_blank">%s</a>', 'https://steemit.com/@recrypto', "@recrypto"),
-							sprintf('<a href="%s" target="_blank">%s</a>', 'https://steemit.com/@recrypto', "@recrypto's")
+							sprintf('@<a href="%s" target="_blank">%s</a>', 'https://steemit.com/@recrypto', "recrypto"),
+							sprintf('@<a href="%s" target="_blank">%s</a>\'s', 'https://steemit.com/@recrypto', "recrypto")
+						);
+					?>
+				</p>
+
+				<p style="width: 35%;">
+					<?php 
+						printf(
+							__("We've reached version %s! A big thanks to the Steem community for supporting this project and specially to %s %s.", 'wp-steem'),
+							WP_STEEM_VERSION,
+							sprintf('@<a href="%s" target="_blank">%s</a>', 'https://steemit.com/@transisto', "transisto"),
+							sprintf('@<a href="%s" target="_blank">%s</a>', 'https://steemit.com/@newsflash', "newsflash")
 						);
 					?>
 				</p>
@@ -168,6 +250,17 @@ class WP_Steem_Settings_Handler {
 
 		if (isset($input['post_types'])) {
 			$new_input['post_types'] = $input['post_types'];
+		}
+
+		$new_input['include_header'] = isset($input['include_header']) ? true : false;
+		$new_input['include_footer'] = isset($input['include_footer']) ? true : false;
+
+		if (isset($input['header'])) {
+			$new_input['header'] = $input['header'];
+		}
+
+		if (isset($input['footer'])) {
+			$new_input['footer'] = $input['footer'];
 		}
 
 		return $new_input;
@@ -274,8 +367,9 @@ class WP_Steem_Settings_Handler {
 			wp_steem_get_setting('default_tags')
 		);
 		printf(
-			'<p>%s</p>',
-			__('Separated by a space. Ex. wordpress wordpress-steem steem blog', 'wp-steem')
+			'<p>%s <br> %s</p>',
+			__('Separated by a space.', 'wp-steem'),
+			__('Example: wordpress wordpress-steem steem blog', 'wp-steem')
 		);
 	}
 
@@ -299,9 +393,74 @@ class WP_Steem_Settings_Handler {
 		}
 	}
 
+	/**
+	 * Display "default include header" input field
+	 *
+	 * @since 1.0.5
+	 */
+	public static function display_default_include_header_field() {
+		printf(
+			'<input type="checkbox" name="wp_steem_settings[include_header]" value="1" %s />',
+			checked(true, wp_steem_get_setting('include_header'), false)
+		);
+		printf(
+			'<p>%s</p>',
+			__('By checking this, the checkbox for "Include Header" is ticked and "Header" field filled with the content from this field in the Edit Post screen.', 'wp-steem')
+		);
+	}
+
+	/**
+	 * Display "header" input field
+	 *
+	 * @since 1.0.5
+	 */
+	public static function display_header_field() {
+		printf(
+			'<textarea class="regular-text" name="wp_steem_settings[header]" rows="3">%s</textarea>',
+			wp_steem_get_setting('header')
+		);
+	}
+
+	/**
+	 * Display "default include footer" input field
+	 *
+	 * @since 1.0.5
+	 */
+	public static function display_default_include_footer_field() {
+		printf(
+			'<input type="checkbox" name="wp_steem_settings[include_footer]" value="1" %s />',
+			checked(true, wp_steem_get_setting('include_footer'), false)
+		);
+		printf(
+			'<p>%s</p>',
+			__('By checking this, the checkbox for "Include Footer" is ticked and "Footer" field filled with the content from this field in the Edit Post screen.', 'wp-steem')
+		);
+	}
+
+	/**
+	 * Display "footer" input field
+	 *
+	 * @since 1.0.5
+	 */
+	public static function display_footer_field() {
+		printf(
+			'<textarea class="regular-text" name="wp_steem_settings[footer]" rows="3">%s</textarea>',
+			wp_steem_get_setting('footer')
+		);
+	}
+
 
 	# Internal
 
+	/**
+	 * Retrieve post types that are enabled
+	 *
+	 * @since 1.0.2
+	 * @param array $args
+	 * @param string $output
+	 * @param string $operator
+	 * @return array $post_types
+	 */
 	protected static function get_post_types($args = array(), $output = 'objects', $operator = 'and') {
 		$args = wp_parse_args($args, array(
 			'public' => true,

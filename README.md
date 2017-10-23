@@ -28,16 +28,16 @@ The plugin will automatically get a 15% curation reward from the Steem post crea
 ## Screenshots
 
 #### Tweaking the Steem Settings (Backend)
-![screenshot-1.png](https://steemitimages.com/DQmV7wXhGDd5RaaPe52cTEjXjdR3X3dcrvbKvF4oxe5zMUH/screenshot-1.png)
+![screenshot-1.png](https://steemitimages.com/DQmYVje4Q5uDB3rV2ivYAtaNnF426sDsAAgz8qyXym4Meow/screenshot-1.png)
 
 #### WordPress - Add New Post - With an option to publish on Steem blockchain (Backend)
-![screenshot-2.png](https://steemitimages.com/DQmUziNb2c8kEKs8eJzXh3Wmvq55VAELCnrKRkB34R15Bz4/screenshot-2.png)
+![screenshot-2.png](https://steemitimages.com/DQmZjM5NABy1xb9yJ8axbFA4xQ7ygzjfAquuqwqc8qZkHgu/screenshot-2.png)
 
 #### WordPress - Add New Post - With an option to completely create content for the Steem post to be published on Steem blockchain (Backend)
-![screenshot-3.png](https://steemitimages.com/DQmPkkpjrLQQ3TiB7MB8h5YttThMBGFNDGtxzaFBJkWfaUE/screenshot-3.png)
+![screenshot-3.png](https://steemitimages.com/DQmbkUpwjSqj7AwPWiCKsYzCnF9FDKcruUKSH8VE5YpT7jb/screenshot-3.png)
 
 #### WordPress - Edit Post - With an option to update a Steem post already published on Steem blockchain (Backend)
-![screenshot-4.png](https://steemitimages.com/DQmWtt3SJFakEi2a11xrSqSkGqG5AzfULdAsAzPxixfi2Wq/screenshot-4.png)
+![screenshot-4.png](https://steemitimages.com/DQmRH9rjKCTeAF2RVYDWgYenB2NjG8skTfUSzbYzF7NdKBb/screenshot-4.png)
 
 <hr>
 
